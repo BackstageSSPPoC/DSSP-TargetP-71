@@ -17,7 +17,6 @@ pipeline {
         APP_PORTS = "5000"
         DEPLOY_ENV = "dev"
         DEPLOY_NAMESPACE = "dev"
-        TARGET_CLUSTER  = "dssp"
         ARGOCD_SERVER   = '35.184.124.65'
         TFSTATE_BUCKET  = 'dssp-infra-bucket'
         MAIN_CONTEXT    = 'gke_project-e8c64b24-1fff-4dd0-a04_us-central1-a_dssp'
@@ -165,7 +164,6 @@ if [ -f pyproject.toml ]; then pip3 install poetry && poetry install; fi
 
                     sed -i "s|\\${APP_NAME}|${APP_NAME}|g"         argocd/${APP_NAME}-${DEPLOY_ENV}.yaml || true
                     sed -i "s|\\${NAMESPACE}|${DEPLOY_NAMESPACE}|g" argocd/${APP_NAME}-${DEPLOY_ENV}.yaml || true
-                    sed -i "s|\\${TARGET_CLUSTER}|${TARGET_CLUSTER}|g" argocd/${APP_NAME}-${DEPLOY_ENV}.yaml || true
 
                     git config user.email "jenkins@local"
                     git config user.name "jenkins"
